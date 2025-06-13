@@ -13,16 +13,14 @@ const UsersPage = () => {
 
     const storedUsers = localStorage.getItem('users')
 
-   
-    
-    useEffect(() => {
+       useEffect(() => {
         if (storedUsers != null) {
         setUsers(JSON.parse(storedUsers))
         } else {
             setUsers([
                 {
                     id: 1, 
-                    name: 'Jonas', 
+                    name: 'Ignas', 
                     position: 'Duomenų analitikas', 
                     gender: 'Vyras', 
                     age: 41
@@ -45,6 +43,15 @@ const UsersPage = () => {
         } 
     }, [])
 
+
+    const handleDeleteUser = (id) => {
+        setUsers(users.filter(users => users.id != id))
+    }
+
+    useEffect(() => {
+        localStorage.setItem('users', JSON.stringify(users))
+    }, [users])
+
     return (
         <div>
             <h1>Vartotojų sąrašas</h1>
@@ -56,6 +63,7 @@ const UsersPage = () => {
                                 <p><strong>Pareigos:</strong> {user.position}</p>
                                 <p><strong>Lytis:</strong> {user.gender}</p>
                                 <p><strong>Amžius:</strong> {user.age}m.</p>
+                                <button onClick={() => handleDeleteUser(user.id)}>Ištrinti vartotoją</button>
                             </li>
                         })
                     }
