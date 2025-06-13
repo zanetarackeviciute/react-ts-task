@@ -48,9 +48,18 @@ const UsersPage = () => {
     return (
         <div>
             <h1>Vartotojų sąrašas</h1>
-            <ul>
-                {}
-            </ul>
+            <ol>
+                    {
+                        users.map((user) => {
+                            return <li key={user.id}>
+                                <p><strong>Vardas:</strong> {user.name}</p>
+                                <p><strong>Pareigos:</strong> {user.position}</p>
+                                <p><strong>Lytis:</strong> {user.gender}</p>
+                                <p><strong>Amžius:</strong> {user.age}m.</p>
+                            </li>
+                        })
+                    }
+            </ol>
         </div>
     )
 }
