@@ -13,6 +13,10 @@ const UsersPage = () => {
 
     const storedUsers = localStorage.getItem('users')
 
+    const [name, setName] = useState('')
+    const [position, setPosition] = useState('')
+    const [gender, setGender] = useState('')
+    const [age, setAge] = useState(0)
 
     useEffect(() => {
         if (storedUsers != null) {
@@ -82,6 +86,22 @@ const UsersPage = () => {
 
     }
 
+    const submitHandlerNewUser = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+
+        setUsers([...users, {
+            id: users.length + 1,
+            name: name,
+            position: position,
+            gender: gender,
+            age: age
+        }])
+
+        setName('')
+        setPosition('')
+        setGender('')
+        setAge(0)
+    }
     return (
         <div>
             <h1>Vartotojų sąrašas</h1>
@@ -104,22 +124,22 @@ const UsersPage = () => {
             <form onSubmit={submitHandlerNewUser}>
                 <div>
                     <label htmlFor="name">Įveskite vardą:</label>
-                    <input type="text" id="name"/>
+                    <input type="text" id="name" value={name} onChange={(event) => setName(event.target.value)}/>
                 </div>
                 <div>
                     <label htmlFor="position">Įveskite pareigas:</label>
-                    <input type="string" id="position"/>
+                    <input type="string" id="position" value={position} onChange={(event) => setPosition(event.target.value)}/>
                 </div>
                 <div>
                     <label htmlFor="gender">Pasirinkite lytį:</label>
-                    <select name="gender" id="gender">
+                    <select name="gender" id="gender" value={gender} onChange={(event) => setGender(event.target.value)}>
                         <option value="man">Vyras</option>
                         <option value="woman">Moteris</option>
                     </select>
                 </div>
                 <div>
                     <label htmlFor="age">Įveskite amžių</label>
-                    <input type="number" id="age" min='16' max='100'/>
+                    <input type="number" id="age" min='16' max='100' value={age} onChange={(event) => setAge(event.target.valueAsNumber)}/>
                 </div>
                 <button type="submit">Išsaugoti</button>
             </form>
