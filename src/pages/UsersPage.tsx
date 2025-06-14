@@ -83,8 +83,10 @@ const UsersPage = () => {
     }
 
     const handlerNewUser = () => {
-
+        setShowForm(true)
     }
+
+    const [showForm, setShowForm] = useState(false)
 
     const submitHandlerNewUser = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -121,28 +123,32 @@ const UsersPage = () => {
             <button onClick={handlerResetUsers}>Atstatyti pradinius vartotojus</button>
             <button onClick={handlerNewUser}>Naujas vartotojas</button>
 
-            <form onSubmit={submitHandlerNewUser}>
-                <div>
-                    <label htmlFor="name">Įveskite vardą:</label>
-                    <input type="text" id="name" value={name} onChange={(event) => setName(event.target.value)}/>
-                </div>
-                <div>
-                    <label htmlFor="position">Įveskite pareigas:</label>
-                    <input type="string" id="position" value={position} onChange={(event) => setPosition(event.target.value)}/>
-                </div>
-                <div>
-                    <label htmlFor="gender">Pasirinkite lytį:</label>
-                    <select name="gender" id="gender" value={gender} onChange={(event) => setGender(event.target.value)}>
-                        <option value="man">Vyras</option>
-                        <option value="woman">Moteris</option>
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="age">Įveskite amžių</label>
-                    <input type="number" id="age" min='16' max='100' value={age} onChange={(event) => setAge(event.target.valueAsNumber)}/>
-                </div>
-                <button type="submit">Išsaugoti</button>
-            </form>
+            {
+                showForm && (
+                <form onSubmit={submitHandlerNewUser}>
+                    <div>
+                        <label htmlFor="name">Įveskite vardą:</label>
+                        <input type="text" id="name" value={name} onChange={(event) => setName(event.target.value)}/>
+                    </div>
+                    <div>
+                        <label htmlFor="position">Įveskite pareigas:</label>
+                        <input type="string" id="position" value={position} onChange={(event) => setPosition(event.target.value)}/>
+                    </div>
+                    <div>
+                        <label htmlFor="gender">Pasirinkite lytį:</label>
+                        <select name="gender" id="gender" value={gender} onChange={(event) => setGender(event.target.value)}>
+                            <option value="man">Vyras</option>
+                            <option value="woman">Moteris</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="age">Įveskite amžių</label>
+                        <input type="number" id="age" min='16' max='100' value={age} onChange={(event) => setAge(event.target.valueAsNumber)}/>
+                    </div>
+                    <button type="submit">Išsaugoti</button>
+                </form>
+                )
+            }
         </div>
     )
 }
