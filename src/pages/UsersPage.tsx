@@ -13,7 +13,8 @@ const UsersPage = () => {
 
     const storedUsers = localStorage.getItem('users')
 
-       useEffect(() => {
+
+    useEffect(() => {
         if (storedUsers != null) {
         setUsers(JSON.parse(storedUsers))
         } else {
@@ -43,14 +44,43 @@ const UsersPage = () => {
         } 
     }, [])
 
-
-    const handleDeleteUser = (id) => {
+    const handlerDeleteUser = (id:number) => {
         setUsers(users.filter(users => users.id != id))
     }
 
     useEffect(() => {
         localStorage.setItem('users', JSON.stringify(users))
     }, [users])
+
+    const handlerResetUsers = () => {
+        setUsers([
+            {
+                id: 1, 
+                name: 'Ignas', 
+                position: 'Duomenų analitikas', 
+                gender: 'Vyras', 
+                age: 41
+            },
+            {
+                id: 2,
+                name: 'Lina',
+                position: 'Front-End programuotoja',
+                gender: 'Moteris',
+                age: 32
+            },
+            {
+                id: 3,
+                name: 'Tomas',
+                position: 'Java programuotojas',
+                gender: 'Vyras',
+                age: 20
+            }
+        ])
+    }
+
+    const handlerNewUser = () => {
+
+    }
 
     return (
         <div>
@@ -63,11 +93,36 @@ const UsersPage = () => {
                                 <p><strong>Pareigos:</strong> {user.position}</p>
                                 <p><strong>Lytis:</strong> {user.gender}</p>
                                 <p><strong>Amžius:</strong> {user.age}m.</p>
-                                <button onClick={() => handleDeleteUser(user.id)}>Ištrinti vartotoją</button>
+                                <button onClick={() => handlerDeleteUser(user.id)}>Ištrinti vartotoją</button>
                             </li>
                         })
                     }
             </ol>
+            <button onClick={handlerResetUsers}>Atstatyti pradinius vartotojus</button>
+            <button onClick={handlerNewUser}>Naujas vartotojas</button>
+
+            <form onSubmit={submitHandlerNewUser}>
+                <div>
+                    <label htmlFor="name">Įveskite vardą:</label>
+                    <input type="text" id="name"/>
+                </div>
+                <div>
+                    <label htmlFor="position">Įveskite pareigas:</label>
+                    <input type="string" id="position"/>
+                </div>
+                <div>
+                    <label htmlFor="gender">Pasirinkite lytį:</label>
+                    <select name="gender" id="gender">
+                        <option value="man">Vyras</option>
+                        <option value="woman">Moteris</option>
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="age">Įveskite amžių</label>
+                    <input type="number" id="age" min='16' max='100'/>
+                </div>
+                <button type="submit">Išsaugoti</button>
+            </form>
         </div>
     )
 }
