@@ -103,6 +103,8 @@ const UsersPage = () => {
         setPosition('')
         setGender('')
         setAge(0)
+
+        setShowForm(false)
     }
     return (
         <div>
