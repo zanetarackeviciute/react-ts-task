@@ -1,0 +1,78 @@
+.container {
+    padding: 20px 0;
+    margin: 0 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.container p {
+    font-size: 24px;
+}
+
+.jokeBlock {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.jokeBlock .newJoke {
+    max-width: 400px;
+}
+
+.jokeBlock .pic {
+    max-width: 200px;
+}
+
+.jokeBlock .pic img {
+    width: 100%;
+}
+
+button {
+    max-width: 150px;
+    padding: 5px 10px;
+    background-color: rgb(126, 156, 220);
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: rgb(62, 83, 128);
+    color: whitesmoke;
+}
+
+.lastDate {
+    font-size: 14px !important;
+}
+
+.jokesCards {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+    margin: 30px 0;
+}
+
+.jokeCard {
+    border-radius: 5px;
+    border: 1px solid black;
+    width: calc((100% - 15px) / 4);
+    font-size: clamp(20px, 2vw, 24px);
+    box-sizing: border-box;
+    padding: 10px 15px;
+}
+
+@media only screen and (max-width: 667px) {
+    .jokeCard p {
+        font-size: clamp(12px, 2vw, 20px);
+    }
+
+    .lastDate {
+    font-size: clamp(8px, 2vw, 18px) !important;
+}
+}

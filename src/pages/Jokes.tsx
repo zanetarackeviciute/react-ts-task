@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import styles from './Jokes.module.css'
+import smile from './joke.png'
 const Jokes = () => {
 
     interface Jokes {
@@ -55,24 +56,35 @@ const Jokes = () => {
     }
 
     return (
-        <div>
-            <h2>Naujausias juokelis!</h2>
-            <p>{newJoke}</p>
-            <p>{newTime}</p>
+        <div className={styles.container}>
+            <h1>Naujausias juokelis!</h1>
+            <div className={styles.jokeBlock}>
+                <div className={styles.newJoke}>
+                    <p>{newJoke}</p>
+                    <p className={styles.lastDate}>{newTime}</p>
+                </div>
+                <div className={styles.pic}>
+                    <img src={smile} alt="smile" />
+                </div>
+            </div>
             <button onClick={handlerAllJokes}>
                 {showHistory ? 'Slėpti visus juokelius' : 'Rodyti visus juokelius'}
             </button>
             {
                 showHistory && (
-                jokesList.map((joky, index) => {
-                    return (
-                        <div key={index}>
-                            <p>{joky.joke}</p>
-                            <p>{joky.date}</p>
-                        </div>
-                    )
-                })
-            )
+                <div  className={styles.jokesCards}>
+                    {
+                        jokesList.map((joky, index) => {
+                            return (
+                                    <div key={index} className={styles.jokeCard}>
+                                        <p>{joky.joke}</p>
+                                        <p className={styles.lastDate}>{joky.date}</p>
+                                    </div>
+                            )
+                        })
+                    }
+                </div>
+                )
             }
         </div>
     )
