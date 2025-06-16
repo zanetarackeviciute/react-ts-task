@@ -13,6 +13,8 @@ const Jokes = () => {
 
     const [jokesList, setJokesList] = useState<Jokes[]>([])
 
+    const [showHistory, setShowHistory] = useState(false)
+
     useEffect(() => {
         if (storedJokes) {
             setJokesList(JSON.parse(storedJokes))
@@ -47,20 +49,29 @@ const Jokes = () => {
         localStorage.setItem('JokesList', JSON.stringify(jokesList))
     }, [jokesList])
 
+    const handlerAllJokes = () => {
+        setShowHistory(previous => ! previous)
+    }
+
     return (
         <div>
             <h2>Naujausias juokelis!</h2>
             <p>{newJoke}</p>
             <p>{newTime}</p>
+            <button onClick={handlerAllJokes}>
+                {showHistory ? 'Slėpti visus juokelius' : 'Rodyti visus juokelius'}
+            </button>
             {
-                jokesList.map((joky) => {
+                showHistory && (
+                jokesList.map((joky, index) => {
                     return (
-                        <>
+                        <div key={index}>
                             <p>{joky.joke}</p>
                             <p>{joky.date}</p>
-                        </>
+                        </div>
                     )
                 })
+            )
             }
         </div>
     )
