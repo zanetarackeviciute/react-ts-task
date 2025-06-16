@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import Jokes from './pages/Jokes'
 import UsersPage from './pages/UsersPage'

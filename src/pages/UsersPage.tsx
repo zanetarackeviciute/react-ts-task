@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import styles from './UsersPage.module.css'
 
 const UsersPage = () => {
     interface User {
@@ -125,18 +126,19 @@ const UsersPage = () => {
     }
     }, [sortOrder])
     return (
-        <div>
-            <select name="orderByName" id="orderByName" value={sortOrder} onChange={(event) => setSortOrder(event.target.value)}>
+        <div className={styles.container}>
+            <h1>Vartotojų sąrašas</h1>
+            <select name="orderByName" id="orderByName" className={styles.orderByName} value={sortOrder} onChange={(event) => setSortOrder(event.target.value)}>
                 <option value="a-z">Rūšiuoti pagal vardą A-Z</option>
                 <option value="z-a">Rūšiuoti pagal vardą Z-A</option>
                 <option value="age-up">Rūšiuoti pagal amžių (didėjančiai)</option>
                 <option value="age-down">Rūšiuoti pagal amžių (mažėjančiai)</option>
             </select>
-            <h1>Vartotojų sąrašas</h1>
-            <ol>
+            <ul className={styles.list}>
                     {
                         users.map((user) => {
                             return <li key={user.id}>
+                                <p><strong>ID:</strong>{user.id}</p>
                                 <p><strong>Vardas:</strong> {user.name}</p>
                                 <p><strong>Pareigos:</strong> {user.position}</p>
                                 <p><strong>Lytis:</strong> {user.gender}</p>
@@ -145,34 +147,39 @@ const UsersPage = () => {
                             </li>
                         })
                     }
-            </ol>
-            <button onClick={handlerResetUsers}>Atstatyti pradinius vartotojus</button>
-            <button onClick={handlerNewUser}>Naujas vartotojas</button>
-
+            </ul>
+            <div className={styles.buttons}>
+                <button onClick={handlerResetUsers} className={styles.reset}>Atstatyti pradinius vartotojus</button>
+                <button onClick={handlerNewUser} className={styles.new}>Naujas vartotojas</button>
+            </div>
             {
                 showForm && (
-                <form onSubmit={submitHandlerNewUser}>
+                    <div className={styles.blockOver}>
+                        <div className={styles.box}>
+                <form onSubmit={submitHandlerNewUser} className={styles.form}>
                     <div>
-                        <label htmlFor="name">Įveskite vardą:</label>
+                        <label htmlFor="name">Įveskite vardą: </label>
                         <input type="text" id="name" value={name} onChange={(event) => setName(event.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="position">Įveskite pareigas:</label>
+                        <label htmlFor="position">Įveskite pareigas: </label>
                         <input type="string" id="position" value={position} onChange={(event) => setPosition(event.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="gender">Pasirinkite lytį:</label>
-                        <select name="gender" id="gender" value={gender} onChange={(event) => setGender(event.target.value)}>
+                        <label htmlFor="gender">Pasirinkite lytį: </label>
+                        <select name="gender" id="gender" className={styles.gender} value={gender} onChange={(event) => setGender(event.target.value)}>
                             <option value="man">Vyras</option>
                             <option value="woman">Moteris</option>
                         </select>
                     </div>
                     <div>
-                        <label htmlFor="age">Įveskite amžių</label>
-                        <input type="number" id="age" min='16' max='100' value={age} onChange={(event) => setAge(event.target.valueAsNumber)}/>
+                        <label htmlFor="age">Įveskite amžių: </label>
+                        <input type="number" id="age" className={styles.age} min='16' max='100' value={age} onChange={(event) => setAge(event.target.valueAsNumber)}/>
                     </div>
-                    <button type="submit">Išsaugoti</button>
+                    <button type="submit" className={styles.saveUser}>Išsaugoti</button>
                 </form>
+                    </div>
+                </div>
                 )
             }
         </div>

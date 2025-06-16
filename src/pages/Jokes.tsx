@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import styles from './Jokes.module.css'
 const Jokes = () => {
 
     interface Jokes {
