@@ -111,6 +111,7 @@ const UsersPage = () => {
 
     useEffect(() => {
         const newOrder = [...users];
+        if (users.length > 0) {
         if (sortOrder == 'a-z') {
             newOrder.sort((a, b) => a.name.localeCompare(b.name))
         } else if (sortOrder == 'z-a') {
@@ -121,6 +122,7 @@ const UsersPage = () => {
             newOrder.sort((a, b) => b.age - a.age)
         }
         setUsers(newOrder)
+    }
     }, [sortOrder])
     return (
         <div>
