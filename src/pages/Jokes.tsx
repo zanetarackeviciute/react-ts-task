@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 const Jokes = () => {
     const [joke, setJoke] = useState<string>('')
     const [time, setTime] = useState<string>('')
+    
 
     useEffect(() => {
         async function getAjoke() { 
@@ -14,10 +15,20 @@ const Jokes = () => {
 
         getAjoke() 
 
+        
+
+        const interval = setInterval(getAjoke, 15000)
+
+        return () => clearInterval(interval)
+
     }, [])
 
     return (
-        <div>Jokes</div>
+        <div>
+            <h1>Dienos juokelis!</h1>
+            <p>{joke}</p>
+            <p>{time}</p>
+        </div>
     )
 
 }
