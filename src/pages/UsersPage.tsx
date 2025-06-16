@@ -106,8 +106,30 @@ const UsersPage = () => {
 
         setShowForm(false)
     }
+
+    const [sortOrder, setSortOrder] = useState('')
+
+    useEffect(() => {
+        const newOrder = [...users];
+        if (sortOrder == 'a-z') {
+            newOrder.sort((a, b) => a.name.localeCompare(b.name))
+        } else if (sortOrder == 'z-a') {
+            newOrder.sort((a, b) => b.name.localeCompare(a.name))
+        } else if (sortOrder == 'age-up') {
+            newOrder.sort((a, b) => a.age - b.age)
+        } else if (sortOrder == 'age-down') {
+            newOrder.sort((a, b) => b.age - a.age)
+        }
+        setUsers(newOrder)
+    }, [sortOrder])
     return (
         <div>
+            <select name="orderByName" id="orderByName" value={sortOrder} onChange={(event) => setSortOrder(event.target.value)}>
+                <option value="a-z">Rūšiuoti pagal vardą A-Z</option>
+                <option value="z-a">Rūšiuoti pagal vardą Z-A</option>
+                <option value="age-up">Rūšiuoti pagal amžių (didėjančiai)</option>
+                <option value="age-down">Rūšiuoti pagal amžių (mažėjančiai)</option>
+            </select>
             <h1>Vartotojų sąrašas</h1>
             <ol>
                     {
