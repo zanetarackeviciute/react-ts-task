@@ -154,8 +154,8 @@ const UsersPage = () => {
             </div>
             {
                 showForm && (
-                    <div className={styles.blockOver}>
-                        <div className={styles.box}>
+                    <div className={styles.blockOver} onClick={() => setShowForm(false)}>
+                        <div className={styles.box} onClick={(event) => event.stopPropagation()}>
                 <form onSubmit={submitHandlerNewUser} className={styles.form}>
                     <div>
                         <label htmlFor="name">Įveskite vardą: </label>
